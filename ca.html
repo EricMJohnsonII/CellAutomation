@@ -10,9 +10,9 @@
 
 <script>
     var table = new Array(30);
-    setupBoard();//1.) Why is the call not inside a function?
-    loopThroughRules();//2.)Why are there parenthesis?
-    printFinalBoard();//3.)What does this function do?
+    setupBoard();//1.) Why is the call not inside a function? -- It needs to happen first
+    loopThroughRules();//2.)Why are there parenthesis? -- Because it is being identified as a function
+    printFinalBoard();//3.)What does this function do?  -- It prints the final board into the canvass after all other functions have run.
 
 
     function setupBoard(){
@@ -23,13 +23,13 @@
             }
         }
 
-        //4.)Explain what the loop does.
+        //4.)Explain what the loop does.  -- This loop assigns i and j values based on column and row to each square in the array.
 
-        table[0][15]='black';//6.) Why are there two sets of brackets?
+        table[0][15]='black';//6.) Why are there two sets of brackets? -- There are two sets of brackets because the square being referenced has an i and j location
     }
 
 
-    function loopThroughRules() {//This is the only function you should have to write.
+    function loopThroughRules() {
         for (var i = 1; i < table.length; i++) { console.log(i);
             for (var j = 1; j < table[i].length-1; j++) {
 
@@ -48,21 +48,21 @@
         }
     }
     function printFinalBoard(){
-        var canvas =  document.getElementById("gameBoard"); //7.) Where is gameBoard?
-        var drawingTools = canvas.getContext('2d'); //8.What is drawingTools?
+        var canvas =  document.getElementById("gameBoard"); //7.) Where is gameBoard? -- Line 8.
+        var drawingTools = canvas.getContext('2d'); //8.What is drawingTools? -- Drawing tools are the browsers settings that I can reference. Its a preset group of accessories I can use to draw my canvass and array.
         drawingTools.fillStyle = '#D3D3D3';
-        drawingTools.fillRect(0,0,canvas.width,canvas.height);//9.)What does this do?
+        drawingTools.fillRect(0,0,canvas.width,canvas.height);//9.)What does this do? -- nothing
 
         for(var i = 0;i<table.length;i++){
             for(var j=0;j<table[i].length;j++){
-                drawingTools.strokeStyle = '#000000';// 10. What color is that?
+                drawingTools.strokeStyle = '#000000';// 10. What color is that? -- Black
 
-                if(table[i][j]=='white'){
-                    drawingTools.strokeRect(j*20,i*20,20,20);//11.) What does the function do?
-                    drawingTools.fillStyle='#ffffff';// 12.) What color is that?
-                    drawingTools.fillRect(j*20,i*20,20,20); // 13.) What do the parameters mean?
+               if(table[i][j]=='white'){
+                    drawingTools.strokeRect(j*20,i*20,20,20);//11.) What does the function do? -- This puts in grid lines
+                    drawingTools.fillStyle='#ffffff';// 12.) What color is that? -- white
+                    drawingTools.fillRect(j*20,i*20,20,20); // 13.) What do the parameters mean? -- The x and y coordinates of a 20 pixel cell.
                 }
-                if(table[i][j]=='black'){//14.) What does this line of code do?
+                if(table[i][j]=='black'){//14.) What does this line of code do? -- This makes array boxes assigned as black turn black on the screen.
                     drawingTools.fillStyle='#000000';
                     drawingTools.fillRect(j*20,i*20,20,20);
                 }
