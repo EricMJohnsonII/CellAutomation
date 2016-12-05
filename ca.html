@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cellular Automaton</title>
+</head>
+<body>
+<canvas id="gameBoard" width="620" height="600" style="border:1px solid #ff0000;"></canvas>
+
+
+<script>
+    var table = new Array(30);
+    setupBoard();//1.) Why is the call not inside a function?
+    loopThroughRules();//2.)Why are there parenthesis?
+    printFinalBoard();//3.)What does this function do?
+
+
+    function setupBoard(){
+        for(var i=0;i<table.length;i++){
+            table[i] = new Array(31);
+            for(var j=0;j<table[i].length;j++){
+                table[i][j]='white';
+            }
+        }
+
+        //4.)Explain what the loop does.
+
+        table[0][15]='black';//6.) Why are there two sets of brackets?
+    }
+
+
+    function loopThroughRules() {//This is the only function you should have to write.
+        for (var i = 1; i < table.length; i++) { console.log(i);
+            for (var j = 1; j < table[i].length-1; j++) {
+
+                if((table[i-1][j-1]=='black')&&(table[i-1][j]=='black')&&(table[i-1][j+1])=='black')table[i][j]='black';
+
+                if((table[i-1][j-1]=='black')&&(table[i-1][j]=='black')&&(table[i-1][j+1])=='white')table[i][j]='black';
+
+                if((table[i-1][j-1]=='black')&&(table[i-1][j]=='white')&&(table[i-1][j+1])=='black')table[i][j]='black';
+
+                if((table[i-1][j-1]=='black')&&(table[i-1][j]=='white')&&(table[i-1][j+1])=='white')table[i][j]='black';
+
+                if((table[i-1][j-1]=='white')&&(table[i-1][j]=='black')&&(table[i-1][j+1])=='black')table[i][j]='black';
+
+                if((table[i-1][j-1]=='white')&&(table[i-1][j]=='white')&&(table[i-1][j+1])=='black')table[i][j]='black';
+            }
+        }
+    }
+    function printFinalBoard(){
+        var canvas =  document.getElementById("gameBoard"); //7.) Where is gameBoard?
+        var drawingTools = canvas.getContext('2d'); //8.What is drawingTools?
+        drawingTools.fillStyle = '#D3D3D3';
+        drawingTools.fillRect(0,0,canvas.width,canvas.height);//9.)What does this do?
+
+        for(var i = 0;i<table.length;i++){
+            for(var j=0;j<table[i].length;j++){
+                drawingTools.strokeStyle = '#000000';// 10. What color is that?
+
+                if(table[i][j]=='white'){
+                    drawingTools.strokeRect(j*20,i*20,20,20);//11.) What does the function do?
+                    drawingTools.fillStyle='#ffffff';// 12.) What color is that?
+                    drawingTools.fillRect(j*20,i*20,20,20); // 13.) What do the parameters mean?
+                }
+                if(table[i][j]=='black'){//14.) What does this line of code do?
+                    drawingTools.fillStyle='#000000';
+                    drawingTools.fillRect(j*20,i*20,20,20);
+                }
+
+
+            }
+
+        }
+
+
+    }
+
+</script>
+
+
+
+</body>
+</html>
